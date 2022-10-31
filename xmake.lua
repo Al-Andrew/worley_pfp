@@ -1,0 +1,27 @@
+add_rules("mode.debug", "mode.release")
+add_requires("raylib")
+set_languages("c++20")
+
+
+target("raygui")
+    set_kind("headeronly")
+    add_headerfiles("lib/raygui/src/*.h")
+    add_includedirs("lib/raygui/src", { public = true })
+    add_packages("raylib")
+    add_rules("utils.install.cmake_importfiles")
+    add_rules("utils.install.pkgconfig_importfiles")
+target_end()
+
+target("raylight")
+    set_kind("headeronly")
+    add_headerfiles("lib/raylight/*.h")
+    add_includedirs("lib/raylight/", { public = true })
+target_end()
+
+target("worley_pfp")
+    set_kind("binary")
+    add_files("src/*.cpp")
+    add_packages("raylib")
+    add_deps("raygui")
+    set_default(true)
+target_end()
